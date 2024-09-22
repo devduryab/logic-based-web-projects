@@ -4,20 +4,64 @@ document.addEventListener('DOMContentLoaded', function () {
     var drawing = false;
     var strokes = [];
 
+    // Helper function to get mouse/touch coordinates
+    function getCoordinates(e) {
+        var rect = canvas.getBoundingClientRect();
+        var x, y;
+
+        if (e.touches) { // For touch events
+            x = e.touches[0].clientX - rect.left;
+            y = e.touches[0].clientY - rect.top;
+        } else { // For mouse events
+            x = e.clientX - rect.left;
+            y = e.clientY - rect.top;
+        }
+
+        return { x: x, y: y };
+    }
+
+    // Mouse events
     canvas.addEventListener('mousedown', function (e) {
         drawing = true;
         ctx.beginPath();
-        ctx.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+        var coords = getCoordinates(e);
+        ctx.moveTo(coords.x, coords.y);
     });
 
     canvas.addEventListener('mousemove', function (e) {
         if (drawing) {
-            ctx.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+            var coords = getCoordinates(e);
+            ctx.lineTo(coords.x, coords.y);
             ctx.stroke();
         }
     });
 
     canvas.addEventListener('mouseup', function () {
+        if (drawing) {
+            drawing = false;
+            strokes.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+        }
+    });
+
+    // Touch events
+    canvas.addEventListener('touchstart', function (e) {
+        e.preventDefault(); // Prevent scrolling
+        drawing = true;
+        ctx.beginPath();
+        var coords = getCoordinates(e);
+        ctx.moveTo(coords.x, coords.y);
+    });
+
+    canvas.addEventListener('touchmove', function (e) {
+        e.preventDefault(); // Prevent scrolling
+        if (drawing) {
+            var coords = getCoordinates(e);
+            ctx.lineTo(coords.x, coords.y);
+            ctx.stroke();
+        }
+    });
+
+    canvas.addEventListener('touchend', function () {
         if (drawing) {
             drawing = false;
             strokes.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
