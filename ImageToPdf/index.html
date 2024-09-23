@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Images to PDF Converter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Convert Images to PDF</h1>
+        <p>Select one or more images to convert them into a PDF file.</p>
+        <div class="upload-section">
+            <input type="file" id="imageUpload" multiple accept="image/*">
+            <button id="convertBtn">Convert to PDF</button>
+            <button id="clear">Clear</button>
+        </div>
+        <div class="preview-section" id="previewSection"></div>
+        <div class="download-section" id="downloadSection"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
