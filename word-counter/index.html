@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <div class="main">
+
+        <h1>Word Counter</h1>
+
+        <div class="container">
+            <div class="buttons-container">
+                <button title="Paste" onclick="pasteText()"><i class="fa-regular fa-paste"></i></button>
+                <button title="Copy" onclick="copyText()"><i class="fa-regular fa-copy"></i></button>
+                <button title="Clear" onclick="clearText()"><i class="fa-solid fa-c"></i></button>
+            </div>
+            
+            <div class="input-container">
+                <textarea id="words" cols="70" rows="13" placeholder="Your text here..." oninput="countWords()"></textarea>
+            </div>
+
+            <div class="result-container">
+                <div class="result-group">
+                    <h3>Characters:</h3>
+                    <p id="charCount">0</p>
+                </div>
+                <div class="result-group">
+                    <h3>Words:</h3>
+                    <p id="wordCount">0</p>
+                </div>
+                <div class="result-group">
+                    <h3>Sentences:</h3>
+                    <p id="sentenceCount">0</p>
+                </div>
+                <div class="result-group">
+                    <h3>Paragraphs:</h3>
+                    <p id="paragraphCount">0</p>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <!-- Script JS -->
+    <script src="./script.js"></script>
+</body>
+</html>
